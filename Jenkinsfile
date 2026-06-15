@@ -66,7 +66,7 @@ pipeline {
                     credentialsId: 'kube',
                     namespace: 'demo',
                     restrictKubeConfigAccess: false,
-                    serverUrl: 'https://0C3300CC10F69B76E3FF015027066680.gr7.ap-south-1.eks.amazonaws.com''
+                    serverUrl: 'https://0C3300CC10F69B76E3FF015027066680.gr7.ap-south-1.eks.amazonaws.com'
                 ) {
                     sh "sed -i 's|replace|${IMAGE_NAME}|g' Deployment.yml"
                     sh "kubectl apply -f Deployment.yml -n ${NAMESPACE}"
