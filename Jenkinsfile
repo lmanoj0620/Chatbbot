@@ -71,7 +71,7 @@ pipeline {
                     serverUrl: 'https://0C3300CC10F69B76E3FF015027066680.gr7.ap-south-1.eks.amazonaws.com'
                 ) {
                     sh "sed -i 's|replace|${IMAGE_NAME}|g' Deployment.yaml"
-                    sh "kubectl apply -f Deployment.yml -n ${NAMESPACE}"
+                    sh "kubectl apply -f Deployment.yaml -n ${NAMESPACE}"
                 }
             }
         }
