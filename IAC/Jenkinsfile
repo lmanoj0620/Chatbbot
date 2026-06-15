@@ -56,6 +56,15 @@ pipeline{
                 }
             }
         }
+        stage("Backup to store statefile"){
+            steps{
+                sh """ 
+                    pwd
+                    cd IAC/
+                    aws s3 cp terraform.tfstate s3://demo-bucket-489393/chatbot/IAC/
+                """
+        }
+            
 
     }
 
