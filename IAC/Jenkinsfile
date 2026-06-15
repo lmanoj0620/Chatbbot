@@ -61,7 +61,7 @@ pipeline{
                 sh """ 
                     pwd
                     cd IAC/
-                    aws s3 cp terraform.tfstate s3://demo-bucket-489393/chatbot/IAC/
+                    aws s3 cp terraform.tfstate s3://demo-bucket-489393/chatbot/terraform-files/
                 """
         }
     }
