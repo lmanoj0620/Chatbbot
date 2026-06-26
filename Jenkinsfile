@@ -45,6 +45,7 @@ pipeline {
         }
         stage("Deploy to microk8s") {
             steps {
+                sh "sed -i 's|replace|${IMAGE_NAME}|g' Deployment.yaml"
                 sh "microk8s.kubectl apply -f Deployment.yaml"
             }
         }
