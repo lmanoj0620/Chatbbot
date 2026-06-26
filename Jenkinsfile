@@ -2,12 +2,7 @@ pipeline {
     agent any
     
     environment {
-        AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
-        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
         IMAGE_NAME   = "lmanojbalaji/manojbala:${GIT_COMMIT}"
-        AWS_REGION   = "ap-south-1"
-        CLUSTER_NAME = "demo-cluster"
-        NAMESPACE    = "demo"
     }
 
     stages {
