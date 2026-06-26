@@ -30,14 +30,14 @@ pipeline {
             steps {
                 sh '''
                 mkdir -p $PROMETHEUS_CONFIG_DIR
-                cp Monitor/prometheus.yml $PROMETHEUS_CONFIG_DIR/
+                cp Monitor/prometheus.yaml $PROMETHEUS_CONFIG_DIR/
 
                 docker ps -q --filter "name=prometheus" | grep -q . && docker stop prometheus && docker rm prometheus || true
 
                 docker run -d \
                   --name=prometheus \
                   -p 9090:9090 \
-                  -v $PROMETHEUS_CONFIG_DIR/prometheus.yml:/etc/prometheus/prometheus.yml \
+                  -v $PROMETHEUS_CONFIG_DIR/prometheus.yaml:/etc/prometheus/prometheus.yml \
                   prom/prometheus
                 '''
             }
