@@ -48,48 +48,9 @@ pipeline {
                 '''
             }
         }
-
-        stage('Cluster-Update') {
+        stage("Deploy to microk8s") {
             steps {
-                sh '''
-                    aws eks update-kubeconfig \
-                      --region ${AWS_REGION} \
-                      --name ${CLUSTER_NAME}
-                '''
-            }
-        }
-
-        stage('Deploying to EKS clsuter') {
-            steps {
-                withKubeConfig(
-                    caCertificate: '',
-                    clusterName: 'demo-cluster',
-                    contextName: '',
-                    credentialsId: 'kube',
-                    namespace: 'demo',
-                    restrictKubeConfigAccess: false,
-                    serverUrl: 'https://0C3300CC10F69B76E3FF015027066680.gr7.ap-south-1.eks.amazonaws.com'
-                ) {
-                    sh "sed -i 's|replace|${IMAGE_NAME}|g' Deployment.yaml"
-                    sh "kubectl apply -f Deployment.yaml -n ${NAMESPACE}"
-                }
-            }
-        }
-
-        stage('Verify the deployment') {
-            steps {
-                withKubeConfig(
-                    caCertificate: '',
-                    clusterName: 'demo-cluster',
-                    contextName: '',
-                    credentialsId: 'kube',
-                    namespace: 'demo',
-                    restrictKubeConfigAccess: false,
-                    serverUrl: 'https://0C3300CC10F69B76E3FF015027066680.gr7.ap-south-1.eks.amazonaws.com'
-                ) {
-                    sh "kubectl get pods -n ${NAMESPACE}"
-                    sh "kubectl get svc -n ${NAMESPACE}"
-                }
+                sh "microk8s.kubectl apply -f Deployment.yaml"
             }
         }
     }
