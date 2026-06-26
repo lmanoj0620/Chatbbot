@@ -9,7 +9,7 @@ pipeline {
         stage('Checkout Repo') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/lmanoj0620/Devops.git'
+                    url: 'https://github.com/lmanoj0620/Chatbbot.git'
             }
         }
 
